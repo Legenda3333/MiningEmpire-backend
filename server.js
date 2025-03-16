@@ -157,4 +157,4 @@ bot.launch({
     },
 });
 
-app.listen(port);
+app.listen(port, () => {`Сервер запущен на порту ${port}`});
