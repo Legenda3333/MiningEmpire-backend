@@ -157,5 +157,5 @@ bot.launch({
     },
 });
 
-app.get("/", (req, res) => {res.send("Mining Empire mini-app backend")});
-app.listen(port);
+//app.get("/", (req, res) => {res.send("Mining Empire mini-app backend")});
+//app.listen(port);
