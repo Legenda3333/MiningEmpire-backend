@@ -1,22 +1,18 @@
-import { Telegraf, Markup } from 'telegraf';
+const { Telegraf } = require('telegraf');
 const bot = new Telegraf('7319758246:AAGam-VqfuaKwM2ys_CqNe0gjqYyGdviTlc');
 
+// Установите вебхук
+bot.launch({
+    webhook: {
+        domain: 'https://mining-empire-backend.vercel.app/',
+        port: 443,
+    },
+});
+
+// Ваши обработчики
 bot.start((ctx) => {
     ctx.reply('Привет');
 });
-
-bot.help((ctx) => {
-    ctx.reply('Это бот, который приветствует вас. Используйте команду /start, чтобы начать!');
-});
-
-// Запуск бота
-bot.launch()
-    .then(() => {
-        console.log('Бот запущен!');
-    })
-    .catch(err => {
-        console.error('Ошибка при запуске бота:', err);
-    });
 
 // Обработка ошибок
 process.once('SIGINT', () => {
