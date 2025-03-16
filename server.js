@@ -146,6 +146,9 @@ const tgController = new TgController();
 const router = express.Router();
 router.post('/getInvoiceLink', (req, res) => tgController.getInvoiceLink(req, res));
 
+app.use(express.json());
+app.use(cors());
+app.use('/tg', router);
 
 bot.launch({
     webhook: {
