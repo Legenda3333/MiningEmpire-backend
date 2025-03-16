@@ -20,4 +20,4 @@ const SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
 const database = createClient(SUPABASE_URL, SUPABASE_API_KEY);
 
 app.get("/", (req, res) => {res.send("MiningEmpire mini-app backend")});
-app.listen(port, () => {`Сервер запущен на порту ${port}`});
+app.listen(PORT, () => {`Сервер запущен на порту ${PORT}`});
