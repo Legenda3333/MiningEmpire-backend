@@ -82,7 +82,21 @@ ctx.reply(
     ]));
 });
 
-const tgController = new TgController();
+// Контроллер для получения ссылки на инвойс
+class TgController {
+    async getInvoiceLink(req, res) {
+        const invoiceID = req.body.invoiceID;
+        let result = await generate_invoice(invoiceID);
+        if (result) {
+            res.json({ success: true, link: result });
+        } 
+    }
+}
+
+const tgController = new TgController();git add .
+git commit -m "update"
+git push origin main
+
 
 const router = express.Router();
 router.post('/getInvoiceLink', (req, res) => tgController.getInvoiceLink(req, res));
