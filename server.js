@@ -130,6 +130,17 @@ async function generate_invoice(invoiceID) {
     return result;
 }
 
+// Контроллер для получения ссылки на инвойс
+class TgController {
+    async getInvoiceLink(req, res) {
+        const invoiceID = req.body.invoiceID;
+        let result = await generate_invoice(invoiceID);
+        if (result) {
+            res.json({ success: true, link: result });
+        } 
+    }
+}
+
 
 bot.launch({
     webhook: {
