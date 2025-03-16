@@ -157,5 +157,4 @@ bot.launch({
     },
 });
 
-app.get("/", (req, res) => {res.send("Mining Empire mini-app backend")});
-app.listen(port, () => {`Сервер запущен на порту ${port}`});
+app.listen(port);
