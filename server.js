@@ -1,4 +1,4 @@
-const { Telegraf } = require('telegraf');
+import { Telegraf, Markup } from 'telegraf';
 const bot = new Telegraf('7319758246:AAGam-VqfuaKwM2ys_CqNe0gjqYyGdviTlc');
 
 // Установите вебхук
