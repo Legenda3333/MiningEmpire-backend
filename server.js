@@ -149,7 +149,7 @@ router.post('/getInvoiceLink', (req, res) => tgController.getInvoiceLink(req, re
 app.use(express.json());
 app.use(cors());
 app.use('/tg', router);
-app.get("/", (req, res) => {res.send("Mining Empire mini-app backend")});
+//app.get("/", (req, res) => {res.send("Mining Empire mini-app backend")});
 app.listen(port);
 
 //bot.launch({
