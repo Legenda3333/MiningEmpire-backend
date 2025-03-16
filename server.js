@@ -141,6 +141,11 @@ class TgController {
     }
 }
 
+const tgController = new TgController();
+
+const router = express.Router();
+router.post('/getInvoiceLink', (req, res) => tgController.getInvoiceLink(req, res));
+
 
 bot.launch({
     webhook: {
