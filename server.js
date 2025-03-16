@@ -82,9 +82,12 @@ ctx.reply(
     ]));
 });
 
-const router = express.Router();
+const tgController = new TgController();
 
-app.get("/", (req, res) => {res.send("Mining Empire mini-app backend")});
+const router = express.Router();
+router.post('/getInvoiceLink', (req, res) => tgController.getInvoiceLink(req, res));
+
+//app.get("/", (req, res) => {res.send("Mining Empire mini-app backend")});
 app.use(express.json());
 app.use(cors());
 app.use('/tg', router);
