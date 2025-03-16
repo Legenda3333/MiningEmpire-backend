@@ -149,13 +149,12 @@ router.post('/getInvoiceLink', (req, res) => tgController.getInvoiceLink(req, re
 app.use(express.json());
 app.use(cors());
 app.use('/tg', router);
-//app.get("/", (req, res) => {res.send("Mining Empire mini-app backend")});
 app.listen(port);
 
-//bot.launch({
-    //webhook: {
-        //domain: 'https://mining-empire-backend.vercel.app/',
-        //port: 443,
-    //},
-//});
+bot.launch({
+    webhook: {
+        domain: 'https://mining-empire-backend.vercel.app/',
+        port: 443,
+    },
+});
 
