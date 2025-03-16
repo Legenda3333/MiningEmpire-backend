@@ -82,6 +82,7 @@ ctx.reply(
     ]));
 });
 
+const router = express.Router();
 
 app.get("/", (req, res) => {res.send("Mining Empire mini-app backend")});
 app.use(express.json());
