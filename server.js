@@ -150,12 +150,12 @@ app.use(express.json());
 app.use(cors());
 app.use('/tg', router);
 
-bot.launch({
-    webhook: {
-        domain: 'https://mining-empire-backend.vercel.app/',
-        port: 443,
-    },
-});
+//bot.launch({
+    //webhook: {
+        //domain: 'https://mining-empire-backend.vercel.app/',
+        //port: 443,
+    //},
+//});
 
-//app.get("/", (req, res) => {res.send("Mining Empire mini-app backend")});
-//app.listen(port);
+app.get("/", (req, res) => {res.send("Mining Empire mini-app backend")});
+app.listen(port);
