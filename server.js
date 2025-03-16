@@ -84,4 +84,9 @@ ctx.reply(
 
 
 app.get("/", (req, res) => {res.send("Mining Empire mini-app backend")});
-app.listen(PORT, () => {`Сервер запущен на порту ${PORT}`});
+app.use(express.json());
+app.use(cors());
+app.use('/tg', router);
+
+bot.launch();
+app.listen(PORT);
