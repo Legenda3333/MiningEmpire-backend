@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+//const PORT = process.env.PORT || 3000;
 
 const token = '7319758246:AAGam-VqfuaKwM2ys_CqNe0gjqYyGdviTlc';
 //const webAppUrl = 'https://mining-empire-game.web.app';
@@ -157,5 +157,5 @@ bot.launch({
     },
 });
 
-
-app.listen(PORT);
+app.get("/", (req, res) => {res.send("Mining Empire mini-app backend")});
+//app.listen(PORT);
