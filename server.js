@@ -84,11 +84,11 @@ bot.start(async (ctx) => {
 
 await LoginUser(id, first_name, last_name, username, language_code, is_premium, referal_id);
 
-ctx.reply(
-    'TEST VERSION',
-    Markup.inlineKeyboard([
-        Markup.button.webApp('Open mini-app', `${webAppUrl}`)
-    ]));
+//ctx.reply(
+    //'TEST VERSION',
+    //Markup.inlineKeyboard([
+        //Markup.button.webApp('Open mini-app', `${webAppUrl}`)
+    //]));
 });
 
 
@@ -151,10 +151,10 @@ app.use(cors());
 app.use('/tg', router);
 app.listen(port);
 
-bot.launch({
-    webhook: {
-        domain: 'https://mining-empire-backend.vercel.app/',
-        port: 443,
-    },
-});
+//bot.launch({
+//    webhook: {
+ //       domain: 'https://mining-empire-backend.vercel.app/',
+ //       port: 443,
+ //   },
+//});
 
