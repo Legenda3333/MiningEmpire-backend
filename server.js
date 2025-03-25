@@ -157,6 +157,7 @@ app.post('/tg/webhook', (req, res) => {
     res.sendStatus(200);
 });
 
+bot.launch();
 app.listen(port);
 
 
