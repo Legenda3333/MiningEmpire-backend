@@ -146,15 +146,22 @@ const tgController = new TgController();
 const router = express.Router();
 router.post('/getInvoiceLink', (req, res) => tgController.getInvoiceLink(req, res));
 
+
+bot.telegram.setWebhook('https://mining-empire-backend.vercel.app/tg/webhook');
+
 app.use(express.json());
 app.use(cors());
-app.use('/tg', router);
 
-bot.launch();
+app.post('/tg/webhook', (req, res) => {
+    bot.handleUpdate(req.body, res);
+    res.sendStatus(200);
+});
+
 app.listen(port);
 
 
 
+//app.use('/tg', router);
 
 //bot.launch({
 //    webhook: {
