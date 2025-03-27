@@ -157,11 +157,6 @@ bot.launch({
     },
 });
 
-app.post('/webhook', (req, res) => {
-    bot.handleUpdate(req.body); // Обработка обновлений
-    res.sendStatus(200); // Отправьте статус 200 в ответ
-});
-
 //app.listen(port);
 
 
