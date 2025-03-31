@@ -99,7 +99,8 @@ bot.start(async (ctx) => {
         '\n' +
         'Готов начать? Давай зарабатывать вместе в MiningEmpire! 💪🔥',
         Markup.inlineKeyboard([
-            Markup.button.webApp('Начать ⛏️', `${webAppUrl}`)
+            Markup.button.webApp('Начать ⛏️', `${webAppUrl}`),
+            Markup.button.url('Официальный канал 📢', 'https://t.me/MiningEmpire_official_channel')
         ]));
     }
 );
