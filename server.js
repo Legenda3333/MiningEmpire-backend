@@ -10,9 +10,6 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 const token = '7319758246:AAGam-VqfuaKwM2ys_CqNe0gjqYyGdviTlc';
-//const webAppUrl = 'https://mining-empire-game.web.app';
-const webAppUrl = 'https://inquisitive-flan-7aa527.netlify.app/';
-
 const bot = new Telegraf(token);
 
 const SUPABASE_URL = 'https://jcynommzpdlnwdahfwdw.supabase.co';
