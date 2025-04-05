@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { Telegraf, Markup } from 'telegraf';
 import { createClient } from '@supabase/supabase-js';
-import fetch from 'node-fetch';
+//import fetch from 'node-fetch';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -18,16 +18,6 @@ const bot = new Telegraf(token);
 const SUPABASE_URL = 'https://jcynommzpdlnwdahfwdw.supabase.co';
 const SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpjeW5vbW16cGRsbndkYWhmd2R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzAzNzgwODksImV4cCI6MjA0NTk1NDA4OX0.fzDinYOvphGxNEi4qkvYo4lCv9yPf6_XqdCD28iQd_U';
 const database = createClient(SUPABASE_URL, SUPABASE_API_KEY);
-
-async function isImageAvailable(url) {
-    try {
-        const response = await fetch(url);
-        return response.ok && response.headers.get('content-type').startsWith('image/');
-    } catch (error) {
-        return false;
-    }
-}
-
 
 // Обработка покупки
 bot.on('pre_checkout_query', async (ctx) => {
