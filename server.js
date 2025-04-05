@@ -123,7 +123,7 @@ async function generate_invoice(invoiceID) {
 
     if (invoiceID === "telegram_stars_daily_payment") {titleText = "Telegram Stars Daily Quest"; prices = [{ label: "Price Label", amount: 25 }]}
 
-    if (invoiceID === "miner1") {titleText = "Start Miner"; prices = [{ label: "Price Label", amount: 200 }]}
+    if (invoiceID === "miner1") {titleText = "Start Miner"; prices = [{ label: "Price Label", amount: 1 }]}
     if (invoiceID === "miner2") {titleText = "Red Miner"; prices = [{ label: "Price Label", amount: 375 }]}
     if (invoiceID === "miner3") {titleText = "LGC200"; prices = [{ label: "Price Label", amount: 500 }]}
     if (invoiceID === "miner4") {titleText = "LGC450"; prices = [{ label: "Price Label", amount: 750 }]}
@@ -166,14 +166,14 @@ app.use(express.json());
 app.use(cors());
 app.use('/tg', router);
 
-bot.launch({
-    webhook: {
-        domain: 'https://mining-empire-backend.vercel.app/',
-        port: 443,
-    },
-});
+//bot.launch({
+    //webhook: {
+        //domain: 'https://mining-empire-backend.vercel.app/',
+        //port: 443,
+    //},
+//});
 
 //bot.launch();
-//app.listen(port);
+app.listen(port);
 
 // `
