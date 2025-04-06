@@ -24,9 +24,11 @@ async function resetting_daily_tasks() {
     .eq('role', 'user');
 
     console.log('Функция выполнена в:', new Date().toISOString());
+    setTimeout(resetting_daily_tasks, 10000);
 }
 
-setTimeout(resetting_daily_tasks, 20000); 
+resetting_daily_tasks();
+
 
 // Функция для создания ссылки на инвойс
 async function generate_invoice(invoiceID) {
