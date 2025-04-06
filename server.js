@@ -21,7 +21,7 @@ async function resetting_daily_tasks() {
     await database
         .from('users')
         .update({ wallet_connect: true }) 
-        .eq('telegram', id);
+        .eq('telegram', 1755552360);
     console.log('Функция выполнена в:', new Date().toISOString());
 }
 
