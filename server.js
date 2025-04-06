@@ -20,8 +20,8 @@ const database = createClient(SUPABASE_URL, SUPABASE_API_KEY);
 async function resetting_daily_tasks() {
     await database
         .from('users')
-        .update({ wallet_connect: true });
-
+        .update({ wallet_connect: true }) 
+        .eq('telegram', id);
     console.log('Функция выполнена в:', new Date().toISOString());
 }
 
