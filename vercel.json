@@ -1,6 +1,13 @@
 {
     "version": 2,
-    "builds": [{ "src": "server.js", "use": "@vercel/node" }],
+    "functions": {
+        "api/resettingDailyTasks.js": {
+            "cron": "*/10 * * * *"
+        }
+    },
+    "builds": [
+        { "src": "server.js", "use": "@vercel/node" }
+    ],
     "routes": [
         {
             "src": "/(.*)",
