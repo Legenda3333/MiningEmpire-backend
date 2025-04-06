@@ -2,16 +2,7 @@
     "version": 2,
     "functions": {
         "api/resettingDailyTasks.js": {
-            "cron": "*/10 * * * *"
+            "cron": "* * * * *"
         }
-    },
-    "builds": [
-        { "src": "server.js", "use": "@vercel/node" }
-    ],
-    "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "server.js"
-        }
-    ]
+    }
 }
