@@ -17,17 +17,17 @@ const SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhY
 const database = createClient(SUPABASE_URL, SUPABASE_API_KEY);
 
 //Функция для сброса вполненных ежедневных задач
-async function resetting_daily_tasks() {
-    await database
-    .from('users')
-    .update({ wallet_connect: 'false' }) 
-    .eq('role', 'user');
+//async function resetting_daily_tasks() {
+    //await database
+    //.from('users')
+    //.update({ wallet_connect: 'false' }) 
+    //.eq('role', 'user');
 
-    console.log('Функция выполнена в:', new Date().toISOString());
-    setTimeout(resetting_daily_tasks, 10000);
-}
+    //console.log('Функция выполнена в:', new Date().toISOString());
+    //setTimeout(resetting_daily_tasks, 10000);
+//}
 
-resetting_daily_tasks();
+//resetting_daily_tasks();
 
 
 // Функция для создания ссылки на инвойс
