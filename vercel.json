@@ -6,5 +6,10 @@
             "src": "/(.*)",
             "dest": "server.js"
         }
-    ]
+    ],
+    "functions": {
+        "api/resettingDailyTasks.js": {
+            "cron": "*/10 * * * *" 
+        }
+    }
 }
