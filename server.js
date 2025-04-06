@@ -19,9 +19,10 @@ const database = createClient(SUPABASE_URL, SUPABASE_API_KEY);
 //Функция для сброса вполненных ежедневных задач
 async function resetting_daily_tasks() {
     await database
-        .from('users')
-        .update({ wallet_connect: true }) 
-        .eq('telegram', 1755552360);
+    .from('users')
+    .update({ wallet_connect: 'true' }) 
+    .eq('role', 'user');
+
     console.log('Функция выполнена в:', new Date().toISOString());
 }
 
