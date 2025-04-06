@@ -20,13 +20,13 @@ const database = createClient(SUPABASE_URL, SUPABASE_API_KEY);
 async function resetting_daily_tasks() {
     await database
     .from('users')
-    .update({ wallet_connect: 'true' }) 
+    .update({ wallet_connect: 'false' }) 
     .eq('role', 'user');
 
     console.log('Функция выполнена в:', new Date().toISOString());
 }
 
-setInterval(resetting_daily_tasks, 10000); 
+setTimeout(resetting_daily_tasks, 20000); 
 
 // Функция для создания ссылки на инвойс
 async function generate_invoice(invoiceID) {
