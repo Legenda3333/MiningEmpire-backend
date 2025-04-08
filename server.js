@@ -9,26 +9,12 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 8080;
 
-const token = '7319758246:AAGam-VqfuaKwM2ys_CqNe0gjqYyGdviTlc';
+const token = '7319758246:AAEC5rtlswvKAXQbzAg2A6hTQi18JgPTj60';
 const bot = new Telegraf(token);
 
 const SUPABASE_URL = 'https://jcynommzpdlnwdahfwdw.supabase.co';
 const SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpjeW5vbW16cGRsbndkYWhmd2R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzAzNzgwODksImV4cCI6MjA0NTk1NDA4OX0.fzDinYOvphGxNEi4qkvYo4lCv9yPf6_XqdCD28iQd_U';
 const database = createClient(SUPABASE_URL, SUPABASE_API_KEY);
-
-//Функция для сброса вполненных ежедневных задач
-//async function resetting_daily_tasks() {
-    //await database
-    //.from('users')
-    //.update({ wallet_connect: 'false' }) 
-    //.eq('role', 'user');
-
-    //console.log('Функция выполнена в:', new Date().toISOString());
-    //setTimeout(resetting_daily_tasks, 10000);
-//}
-
-//resetting_daily_tasks();
-
 
 // Функция для создания ссылки на инвойс
 async function generate_invoice(invoiceID) {
