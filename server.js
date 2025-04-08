@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 8080;
+const port = 3000;
 
 const token = '7319758246:AAERukjX-N-iHtTasYce2f1ybQHlYqLf7jU';
 const bot = new Telegraf(token);
