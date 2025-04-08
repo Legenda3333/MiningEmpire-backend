@@ -7,14 +7,12 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 8080;
 
-const token = '7319758246:AAEC5rtlswvKAXQbzAg2A6hTQi18JgPTj60';
-const bot = new Telegraf(token);
+const bot = new Telegraf(tokeprocess.env.TOKEN);
 
-const SUPABASE_URL = 'https://jcynommzpdlnwdahfwdw.supabase.co';
-const SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpjeW5vbW16cGRsbndkYWhmd2R3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzAzNzgwODksImV4cCI6MjA0NTk1NDA4OX0.fzDinYOvphGxNEi4qkvYo4lCv9yPf6_XqdCD28iQd_U';
-const database = createClient(SUPABASE_URL, SUPABASE_API_KEY);
+//const SUPABASE_URL = process.env.SUPABASE_URL;
+//const SUPABASE_API_KEY = process.env.SUPABASE_API_KEY;
+//const database = createClient(SUPABASE_URL, SUPABASE_API_KEY);
 
 // Функция для создания ссылки на инвойс
 async function generate_invoice(invoiceID) {
@@ -69,6 +67,6 @@ app.use(express.json());
 app.use(cors());
 app.use('/tg', router);
 
-app.listen(port);
+app.listen(process.env.PORT || 8080);
 
 // `
