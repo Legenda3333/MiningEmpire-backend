@@ -56,12 +56,19 @@ class TgController {
             res.json({ success: true, link: result });
         } 
     }
+    async getSecrets(req, res) {
+        res.json({
+            SUPABASE_URL: process.env.SUPABASE_URL,
+            SUPABASE_API_KEY: process.env.SUPABASE_API_KEY
+        });
+    }
 }
 
 const tgController = new TgController();
 
 const router = express.Router();
 router.post('/getInvoiceLink', (req, res) => tgController.getInvoiceLink(req, res));
+router.get('/getSecrets', (req, res) => tgController.getSecrets(req, res));
 
 app.use(express.json());
 app.use(cors());
