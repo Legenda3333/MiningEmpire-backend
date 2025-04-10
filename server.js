@@ -71,7 +71,7 @@ router.post('/getInvoiceLink', (req, res) => tgController.getInvoiceLink(req, re
 router.get('/getSecrets', (req, res) => tgController.getSecrets(req, res));
 
 app.use(express.json());
-const allowedDomains = ['https://inquisitive-flan-7aa527.netlify.app/']
+const allowedDomains = ['https://inquisitive-flan-7aa527.netlify.app']
 app.use(cors({
     origin: allowedDomains,
     methods: ['GET', 'POST'], 
