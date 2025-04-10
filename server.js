@@ -71,7 +71,12 @@ router.post('/getInvoiceLink', (req, res) => tgController.getInvoiceLink(req, re
 router.get('/getSecrets', (req, res) => tgController.getSecrets(req, res));
 
 app.use(express.json());
-app.use(cors());
+const allowedDomains = ['https://inquisitive-flan-7aa527.netlify.app/']
+app.use(cors({
+    origin: allowedDomains,
+    methods: ['GET', 'POST'], 
+    credentials: true 
+}));
 app.use('/tg', router);
 
 app.listen(process.env.PORT);
