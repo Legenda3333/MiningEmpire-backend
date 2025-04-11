@@ -67,7 +67,7 @@ class TgController {
     async resetting_daily_tasks(req, res) {
         await database
         .from('users')
-        .update({ wallet_connect: 'false' }) 
+        .update({ task1_1: 'false', task1_2: 'false', task1_3: 'false', task1_4: 'false' }) 
         .eq('role', 'user');
 
         res.status(200).send({ message: 'Успешный сброс ежедневных задач!' });
