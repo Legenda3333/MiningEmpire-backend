@@ -76,7 +76,6 @@ class TgController {
 
     async runCronJob(req, res) {
         await resetting_daily_tasks();
-        res.json({ success: true, message: 'Daily tasks have been reset!' });
     }
 }
 
