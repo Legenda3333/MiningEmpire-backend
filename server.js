@@ -76,6 +76,7 @@ class TgController {
 
     async runCronJob(req, res) {
         await resetting_daily_tasks();
+        res.status(200).send({ message: 'Успешный сброс ежедневных задач!' });
     }
 }
 
