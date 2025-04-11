@@ -85,7 +85,7 @@ const tgController = new TgController();
 const router = express.Router();
 router.post('/getInvoiceLink', (req, res) => tgController.getInvoiceLink(req, res));
 router.get('/getSecrets', (req, res) => tgController.getSecrets(req, res));
-router.get('/resetting_daily_tasks', (req, res) => tgController.runCronJob(req, res)); 
+router.post('/resetting_daily_tasks', (req, res) => tgController.runCronJob(req, res)); 
 
 app.use(express.json());
 const allowedDomains = [process.env.FRONTEND_URL];
