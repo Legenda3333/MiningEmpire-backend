@@ -14,6 +14,25 @@ const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_API_KEY = process.env.SUPABASE_API_KEY;
 const database = createClient(SUPABASE_URL, SUPABASE_API_KEY);
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+//Функция для сброса вполненных ежедневных задач
+async function resetting_daily_tasks() {
+    await database
+    .from('users')
+    .update({ wallet_connect: 'false' }) 
+    .eq('role', 'user');
+
+    await sleep(10000);
+    console.log('Функция выполнена!');
+    resetting_daily_tasks();
+    //setTimeout(resetting_daily_tasks, 10000);
+}
+
+resetting_daily_tasks();
+
 // Функция для создания ссылки на инвойс
 async function generate_invoice(invoiceID) {
     let titleText, prices;
