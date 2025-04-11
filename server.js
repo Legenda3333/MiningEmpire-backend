@@ -14,24 +14,16 @@ const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_API_KEY = process.env.SUPABASE_API_KEY;
 const database = createClient(SUPABASE_URL, SUPABASE_API_KEY);
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
 
 //Функция для сброса вполненных ежедневных задач
 async function resetting_daily_tasks() {
     await database
-    .from('users')
-    .update({ wallet_connect: 'false' }) 
-    .eq('role', 'user');
+        .from('users')
+        .update({ wallet_connect: 'false' }) 
+        .eq('role', 'user');
 
-    await sleep(10000);
     console.log('Функция выполнена!');
-    resetting_daily_tasks();
-    //setTimeout(resetting_daily_tasks, 10000);
 }
-
-resetting_daily_tasks();
 
 // Функция для создания ссылки на инвойс
 async function generate_invoice(invoiceID) {
@@ -66,7 +58,6 @@ async function generate_invoice(invoiceID) {
     return result;
 }
 
-// Контроллер для получения ссылки на инвойс
 class TgController {
     async getInvoiceLink(req, res) {
         const invoiceID = req.body.invoiceID;
@@ -75,11 +66,17 @@ class TgController {
             res.json({ success: true, link: result });
         } 
     }
+
     async getSecrets(req, res) {
         res.json({
             SUPABASE_URL: process.env.SUPABASE_URL,
             SUPABASE_API_KEY: process.env.SUPABASE_API_KEY
         });
+    }
+
+    async runCronJob(req, res) {
+        await resetting_daily_tasks();
+        res.json({ success: true, message: 'Daily tasks have been reset!' });
     }
 }
 
@@ -88,9 +85,10 @@ const tgController = new TgController();
 const router = express.Router();
 router.post('/getInvoiceLink', (req, res) => tgController.getInvoiceLink(req, res));
 router.get('/getSecrets', (req, res) => tgController.getSecrets(req, res));
+router.get('/resetting_daily_tasks', (req, res) => tgController.runCronJob(req, res)); 
 
 app.use(express.json());
-const allowedDomains = [process.env.FRONTEND_URL]
+const allowedDomains = [process.env.FRONTEND_URL];
 app.use(cors({
     origin: allowedDomains,
     methods: ['GET', 'POST'], 
