@@ -15,16 +15,6 @@ const SUPABASE_API_KEY = process.env.SUPABASE_API_KEY;
 const database = createClient(SUPABASE_URL, SUPABASE_API_KEY);
 
 
-//Функция для сброса вполненных ежедневных задач
-async function resetting_daily_tasks() {
-    await database
-        .from('users')
-        .update({ wallet_connect: 'false' }) 
-        .eq('role', 'user');
-
-    console.log('Функция выполнена!');
-}
-
 // Функция для создания ссылки на инвойс
 async function generate_invoice(invoiceID) {
     let titleText, prices;
@@ -74,8 +64,12 @@ class TgController {
         });
     }
 
-    async runCronJob(req, res) {
-        await resetting_daily_tasks();
+    async resetting_daily_tasks(req, res) {
+        await database
+        .from('users')
+        .update({ wallet_connect: 'false' }) 
+        .eq('role', 'user');
+
         res.status(200).send({ message: 'Успешный сброс ежедневных задач!' });
     }
 }
@@ -85,7 +79,7 @@ const tgController = new TgController();
 const router = express.Router();
 router.post('/getInvoiceLink', (req, res) => tgController.getInvoiceLink(req, res));
 router.get('/getSecrets', (req, res) => tgController.getSecrets(req, res));
-router.post('/resetting_daily_tasks', (req, res) => tgController.runCronJob(req, res)); 
+router.post('/resetting_daily_tasks', (req, res) => tgController.resetting_daily_tasks(req, res)); 
 
 app.use(express.json());
 const allowedDomains = [process.env.FRONTEND_URL];
