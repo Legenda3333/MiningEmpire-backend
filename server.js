@@ -14,6 +14,7 @@ const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_API_KEY = process.env.SUPABASE_API_KEY;
 const database = createClient(SUPABASE_URL, SUPABASE_API_KEY);
 
+let block_number = 0;
 
 // Функция для создания ссылки на инвойс
 async function generate_invoice(invoiceID) {
@@ -72,6 +73,27 @@ class TgController {
 
         res.status(200).send({ message: 'Успешный сброс ежедневных задач!' });
     }
+
+    async reward_for_new_block(req, res) {
+        const { data: users } = await database
+            .from('users') 
+            .select('id, MiningPower, MEC')
+            .eq('role', 'user');
+    
+        const totalMiningPower = users.reduce((sum, row) => sum + row.MiningPower, 0);
+    
+        const updates = users.map(user => {
+            const reward = user.MiningPower / totalMiningPower * 10000; // Вычисляем награду
+            return database
+                .from('users') 
+                .update({ MEC: user.MEC + reward }) // Обновляем MEC
+                .eq('id', user.id); // Условие обновления по id
+        });
+    
+        await Promise.all(updates);
+        block_number += 1;
+        res.status(200).send({ message: `Награды за блок #${block_number} начислены` });
+    }
 }
 
 const tgController = new TgController();
@@ -80,6 +102,7 @@ const router = express.Router();
 router.post('/getInvoiceLink', (req, res) => tgController.getInvoiceLink(req, res));
 router.get('/getSecrets', (req, res) => tgController.getSecrets(req, res));
 router.post('/resetting_daily_tasks', (req, res) => tgController.resetting_daily_tasks(req, res)); 
+router.post('/reward_for_new_block', (req, res) => tgController.reward_for_new_block(req, res)); 
 
 app.use(express.json());
 const allowedDomains = [process.env.FRONTEND_URL];
