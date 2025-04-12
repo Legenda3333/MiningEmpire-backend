@@ -14,8 +14,6 @@ const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_API_KEY = process.env.SUPABASE_API_KEY;
 const database = createClient(SUPABASE_URL, SUPABASE_API_KEY);
 
-let block_number = 0;
-
 // Функция для создания ссылки на инвойс
 async function generate_invoice(invoiceID) {
     let titleText, prices;
@@ -91,8 +89,7 @@ class TgController {
         });
     
         await Promise.all(updates);
-        block_number += 1;
-        res.status(200).send({ message: `Награды за блок #${block_number} начислены` });
+        res.status(200).send({ message: 'Награды за добытый блок начислены!' });
     }
 }
 
