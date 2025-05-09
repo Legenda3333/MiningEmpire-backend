@@ -57,7 +57,14 @@ class TgController {
         const is_premium = req.body.is_premium;
         const time_reg = req.body.time_reg;
         const avatar = req.body.avatar;
-
+        console.log(UserID);
+        console.log(first_name);
+        console.log(last_name);
+        console.log(username);
+        console.log(language);
+        console.log(is_premium);
+        console.log(time_reg);
+        console.log(avatar);
 
         const { data } = await database
         .from('users')
