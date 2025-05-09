@@ -51,18 +51,22 @@ class TgController {
     async UserAuthorization(req, res) {
         const UserID = req.body.UserID;
 
-        const { data } = await database
+        const { data: userData } = await database
         .from('users')
         .select('*')
         .eq('telegram_id', UserID);
 
-        const { list_friends } = await database
+    
+        const { data: friendsList } = await database
         .from('users')
         .select('first_name, last_name, username, MiningPower, avatar_url, is_premium, time_reg')
         .eq('referal_id', UserID);
 
-        if (data.length === 1) {
-            res.json(data[0]);
+        if (userData.length === 1) {
+            res.json({
+                user: userData[0], 
+                friends: friendsList 
+            });
         } else if (data.length === 0) {
             const NewUserInfo = { 
                 telegram: UserID, 
