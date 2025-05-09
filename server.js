@@ -61,7 +61,13 @@ class TgController {
         } else if (data.length === 0) {
             const NewUserInfo = { 
                 telegram_id: UserID, 
-
+                first_name: req.body.first_name, 
+                last_name: req.body.last_name, 
+                username: req.body.username, 
+                language: req.body.language_code, 
+                is_premium: req.body.is_premium, 
+                time_reg: req.body.time_reg,
+                avatar_url: req.body.avatar
             };
             
             await database
