@@ -54,8 +54,8 @@ class TgController {
         const last_name = req.body.last_name;
         const username = req.body.username;
         const language = req.body.language_code;
-        const is_premium = req.body.first_name;
-        const time_reg = req.body.first_name;
+        const is_premium = req.body.is_premium;
+        const time_reg = req.body.time_reg;
         const avatar = req.body.avatar;
 
 
