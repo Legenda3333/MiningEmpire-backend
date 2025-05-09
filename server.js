@@ -84,7 +84,7 @@ class TgController {
             .select('*')
             .eq('telegram_id', UserID);    
 
-            res.json({userInfo: NewRegisteredUser, list_friends: friendsList });
+            res.json({userInfo: userData, list_friends: friendsList });
         }
     }
 
