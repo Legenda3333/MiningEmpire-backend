@@ -56,7 +56,9 @@ class TgController {
         .select('*')
         .eq('telegram', UserID);
 
-        res.json(data[0]);
+        if (data.length === 1) {
+            res.json(data[0]);
+        }
     }
 
     async getInvoiceLink(req, res) {
