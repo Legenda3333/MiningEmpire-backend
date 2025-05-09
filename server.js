@@ -48,6 +48,17 @@ async function generate_invoice(invoiceID) {
 }
 
 class TgController {
+    async UserAuthorization(req, res) {
+        const UserID = req.body.UserID;
+
+        const { data } = await database
+        .from('users')
+        .select('*')
+        .eq('telegram', UserID);
+
+        res.json({data});
+    }
+
     async getInvoiceLink(req, res) {
         const invoiceID = req.body.invoiceID;
         let result = await generate_invoice(invoiceID);
@@ -100,6 +111,8 @@ router.post('/getInvoiceLink', (req, res) => tgController.getInvoiceLink(req, re
 router.get('/getSecrets', (req, res) => tgController.getSecrets(req, res));
 router.post('/resetting_daily_tasks', (req, res) => tgController.resetting_daily_tasks(req, res)); 
 router.post('/reward_for_new_block', (req, res) => tgController.reward_for_new_block(req, res)); 
+
+router.get('/UserAuthorization', (req, res) => tgController.UserAuthorization(req, res));
 
 app.use(express.json());
 const allowedDomains = [process.env.FRONTEND_URL];
