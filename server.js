@@ -51,21 +51,14 @@ class TgController {
     async UserAuthorization(req, res) {
         const UserID = req.body.UserID;
 
-        const { data: userData } = await database
+        const { data } = await database
         .from('users')
         .select('*')
         .eq('telegram_id', UserID);
 
-        const { data: friendsList } = await database
-        .from('users')
-        .select('first_name, last_name, username, MiningPower, avatar_url, is_premium, time_reg')
-        .eq('referal_id', UserID);
-
-        if (userData.length === 1) {
-            console.log('Пользователь уже зареган!');
-            res.json({userInfo: userData[0], list_friends: friendsList });
-        } else if (userData.length === 0) {
-            console.log('Пользователь НЕ зареган!');
+        if (data.length === 1) {
+            res.json(data[0]);
+        } else if (data.length === 0) {
             const NewUserInfo = { 
                 telegram: UserID, 
                 first_name: req.body.first_name, 
@@ -76,18 +69,17 @@ class TgController {
                 time_reg: req.body.time_reg,
                 avatar_url: req.body.avatar
             };
-            console.log(NewUserInfo);
 
             await database
             .from('users')
             .insert([NewUserInfo]);
 
-            const { data: NewRegisteredUser } = await database
+            const { data } = await database
             .from('users')
             .select('*')
-            .eq('telegram_id', UserID);    
+            .eq('telegram_id', UserID);
 
-            res.json({userInfo: NewRegisteredUser[0], list_friends: friendsList });
+            res.json(data[0]);
         }
     }
 
