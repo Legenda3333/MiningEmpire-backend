@@ -50,21 +50,6 @@ async function generate_invoice(invoiceID) {
 class TgController {
     async UserAuthorization(req, res) {
         const UserID = req.body.UserID;
-        const first_name = req.body.first_name;
-        const last_name = req.body.last_name;
-        const username = req.body.username;
-        const language = req.body.language_code;
-        const is_premium = req.body.is_premium;
-        const time_reg = req.body.time_reg;
-        const avatar = req.body.avatar;
-        console.log(UserID);
-        console.log(first_name);
-        console.log(last_name);
-        console.log(username);
-        console.log(language);
-        console.log(is_premium);
-        console.log(time_reg);
-        console.log(avatar);
 
         const { data } = await database
         .from('users')
@@ -75,9 +60,16 @@ class TgController {
             res.json(data[0]);
         } else if (data.length === 0) {
             const NewUserInfo = { 
-                telegram: UserID, 
+                telegram_id: UserID, 
+                first_name: req.body.first_name, 
+                last_name: req.body.last_name, 
+                username: req.body.username, 
+                language: req.body.language_code, 
+                is_premium: req.body.is_premium, 
+                time_reg: req.body.time_reg,
+                avatar_url: req.body.avatar
             };
-
+            
             await database
             .from('users')
             .insert([NewUserInfo]);
