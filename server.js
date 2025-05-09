@@ -54,29 +54,30 @@ class TgController {
         const { data } = await database
         .from('users')
         .select('*')
-        .eq('telegram', UserID);
+        .eq('telegram_id', UserID);
 
         if (data.length === 1) {
             res.json(data[0]);
         } else if (data.length === 0) {
-            const first_name = req.body.first_name;
-            const last_name = req.body.last_name;
-            const username = req.body.username;
-            const language_code = req.body.language_code;
-            const is_premium = req.body.is_premium; 
-            const time_reg = req.body.time_reg;
-            const avatar = req.body.avatar;
-
-            const userData = { telegram: UserID, avatar_url: avatar, first_name: first_name, last_name: last_name, username: username, language: language_code, is_premium: is_premium, time_reg: time_reg };
+            const NewUserInfo = { 
+                telegram: UserID, 
+                first_name: req.body.first_name, 
+                last_name: req.body.last_name, 
+                username: req.body.username, 
+                language: req.body.language_code, 
+                is_premium: req.body.is_premium, 
+                time_reg: req.body.time_reg,
+                avatar_url: req.body.avatar
+            };
 
             await database
             .from('users')
-            .insert([userData]);
+            .insert([NewUserInfo]);
 
             const { data } = await database
             .from('users')
             .select('*')
-            .eq('telegram', UserID);
+            .eq('telegram_id', UserID);
 
             res.json(data[0]);
         }
