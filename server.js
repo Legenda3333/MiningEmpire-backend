@@ -62,7 +62,7 @@ class TgController {
         .eq('referal_id', UserID);
 
         if (userData.length === 1) {
-            res.json({userInfo: userData[0], list_friends: friendsList });
+            res.json({userInfo: userData, list_friends: friendsList });
         } else if (userData.length === 0) {
             const NewUserInfo = { 
                 telegram: UserID, 
