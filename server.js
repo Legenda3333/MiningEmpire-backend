@@ -79,7 +79,7 @@ class TgController {
             .from('users')
             .insert([NewUserInfo]);
 
-            const { data } = await database
+            const { data: userData } = await database
             .from('users')
             .select('*')
             .eq('telegram_id', UserID);
