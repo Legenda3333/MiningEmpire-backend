@@ -91,13 +91,6 @@ class TgController {
         } 
     }
 
-    async getSecrets(req, res) {
-        res.json({
-            SUPABASE_URL: process.env.SUPABASE_URL,
-            SUPABASE_API_KEY: process.env.SUPABASE_API_KEY
-        });
-    }
-
     async resetting_daily_tasks(req, res) {
         await database
         .from('users')
@@ -131,12 +124,11 @@ class TgController {
 const tgController = new TgController();
 
 const router = express.Router();
-router.post('/getInvoiceLink', (req, res) => tgController.getInvoiceLink(req, res));
-router.get('/getSecrets', (req, res) => tgController.getSecrets(req, res));
-router.post('/resetting_daily_tasks', (req, res) => tgController.resetting_daily_tasks(req, res)); 
-router.post('/reward_for_new_block', (req, res) => tgController.reward_for_new_block(req, res)); 
 
 router.post('/UserAuthorization', (req, res) => tgController.UserAuthorization(req, res));
+router.post('/getInvoiceLink', (req, res) => tgController.getInvoiceLink(req, res));
+router.post('/resetting_daily_tasks', (req, res) => tgController.resetting_daily_tasks(req, res)); 
+router.post('/reward_for_new_block', (req, res) => tgController.reward_for_new_block(req, res)); 
 
 app.use(express.json());
 const allowedDomains = [process.env.FRONTEND_URL];
