@@ -62,8 +62,10 @@ class TgController {
         .eq('referal_id', UserID);
 
         if (userData.length === 1) {
-            res.json({userInfo: userData, list_friends: friendsList });
+            console.log('Пользователь уже зареган!');
+            res.json({userInfo: userData[0], list_friends: friendsList });
         } else if (userData.length === 0) {
+            console.log('Пользователь НЕ зареган!');
             const NewUserInfo = { 
                 telegram: UserID, 
                 first_name: req.body.first_name, 
@@ -84,7 +86,7 @@ class TgController {
             .select('*')
             .eq('telegram_id', UserID);    
 
-            res.json({userInfo: userData, list_friends: friendsList });
+            res.json({userInfo: NewRegisteredUser[0], list_friends: friendsList });
         }
     }
 
