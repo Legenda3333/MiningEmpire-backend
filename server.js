@@ -67,7 +67,7 @@ class TgController {
                 userInfo: userData[0], 
                 list_friends: friendsList 
             });
-        } else if (data.length === 0) {
+        } else if (userData.length === 0) {
             const NewUserInfo = { 
                 telegram: UserID, 
                 first_name: req.body.first_name, 
