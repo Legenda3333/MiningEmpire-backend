@@ -56,7 +56,7 @@ class TgController {
         .select('*')
         .eq('telegram', UserID);
 
-        res.json({data});
+        res.json({ data });
     }
 
     async getInvoiceLink(req, res) {
@@ -112,7 +112,7 @@ router.get('/getSecrets', (req, res) => tgController.getSecrets(req, res));
 router.post('/resetting_daily_tasks', (req, res) => tgController.resetting_daily_tasks(req, res)); 
 router.post('/reward_for_new_block', (req, res) => tgController.reward_for_new_block(req, res)); 
 
-router.get('/UserAuthorization', (req, res) => tgController.UserAuthorization(req, res));
+router.post('/UserAuthorization', (req, res) => tgController.UserAuthorization(req, res));
 
 app.use(express.json());
 const allowedDomains = [process.env.FRONTEND_URL];
