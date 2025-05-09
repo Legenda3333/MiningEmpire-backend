@@ -76,6 +76,7 @@ class TgController {
                 time_reg: req.body.time_reg,
                 avatar_url: req.body.avatar
             };
+            console.log(NewUserInfo);
 
             await database
             .from('users')
