@@ -59,7 +59,7 @@ class TgController {
         const { list_friends } = await database
         .from('users')
         .select('first_name, last_name, username, MiningPower, avatar_url, is_premium, time_reg')
-        .eq('referal_id', id);
+        .eq('referal_id', UserID);
 
         if (data.length === 1) {
             res.json(data[0], list_friends);
