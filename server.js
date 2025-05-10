@@ -61,11 +61,9 @@ class TgController {
         .select('first_name, last_name, username, MiningPower, avatar_url, is_premium, time_reg')
         .eq('referal_id', UserID);
         
-    if (userData.length === 1) {
-        res.json({
-            user: userData[0], 
-            friends: friendsList 
-        })} else if (data.length === 0) {
+        if (userData.length === 1) {
+            res.json({ user: userData[0], friends: friendsList })
+        } else if (data.length === 0) {
             const NewUserInfo = { 
                 telegram_id: UserID, 
                 first_name: req.body.first_name, 
@@ -81,12 +79,12 @@ class TgController {
             .from('users')
             .insert([NewUserInfo]);
 
-            const { data } = await database
+            const { data: userData } = await database
             .from('users')
             .select('*')
             .eq('telegram_id', UserID);
 
-            res.json(data[0]);
+            res.json({ user: userData[0], friends: friendsList })
         }
     }
 
