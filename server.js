@@ -63,7 +63,7 @@ class TgController {
         
         if (userData.length === 1) {
             res.json({ user: userData[0], friends: friendsList })
-        } else if (data.length === 0) {
+        } else if (userData.length === 0) {
             const NewUserInfo = { 
                 telegram_id: UserID, 
                 first_name: req.body.first_name, 
@@ -84,6 +84,7 @@ class TgController {
             .select('*')
             .eq('telegram_id', UserID);
 
+            //res.status(400).send({ message: 'Функция выполнена!' });
             res.json({ user: userData[0], friends: friendsList })
         }
     }
