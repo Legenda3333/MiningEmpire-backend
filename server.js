@@ -50,20 +50,14 @@ async function generate_invoice(invoiceID) {
 class TgController {
     async UserAuthorization(req, res) {
         const UserID = req.body.UserID;
+        let userData;
 
-        const { data: userData } = await database
-        .from('users')
-        .select('*')
-        .eq('telegram_id', UserID);
-
-        const { data: friendsList } = await database
-        .from('users')
-        .select('first_name, last_name, username, MiningPower, avatar_url, is_premium, time_reg')
-        .eq('referal_id', UserID);
-        
-        if (userData.length === 1) {
-            res.json({ user: userData[0], friends: friendsList })
-        } else if (userData.length === 0) {
+        const { data: initialUserData } = await database
+            .from('users')
+            .select('*')
+            .eq('telegram_id', UserID);
+    
+        if (initialUserData.length === 0) {
             const NewUserInfo = { 
                 telegram_id: UserID, 
                 first_name: req.body.first_name, 
@@ -74,20 +68,27 @@ class TgController {
                 time_reg: req.body.time_reg,
                 avatar_url: req.body.avatar
             };
-            
+    
             await database
+                .from('users')
+                .insert([NewUserInfo]);
+            
+            const { data: createdUserData } = await database
+                .from('users')
+                .select('*')
+                .eq('telegram_id', UserID);
+            
+            userData = createdUserData;
+        } else { userData = initialUserData }
+    
+        const { data: friendsList } = await database
             .from('users')
-            .insert([NewUserInfo]);
-
-            const { data: userData } = await database
-            .from('users')
-            .select('*')
-            .eq('telegram_id', UserID);
-
-            //res.status(400).send({ message: 'Функция выполнена!' });
-            res.json({ user: userData[0], friends: friendsList })
-        }
+            .select('first_name, last_name, username, MiningPower, avatar_url, is_premium, time_reg')
+            .eq('referal_id', UserID);
+        
+        res.json({ user: userData[0], friends: friendsList });
     }
+    
 
     async getInvoiceLink(req, res) {
         const invoiceID = req.body.invoiceID;
