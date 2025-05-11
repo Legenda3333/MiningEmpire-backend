@@ -112,6 +112,19 @@ class TgController {
         res.json({ users_MiningPower });
     }
     
+
+    async updateCountMiners(req, res) {
+        const UserID = req.body.UserID;
+        const userInfo = req.body.userInfo;
+
+        await database
+        .from("users")
+        .update({M1:userInfo.M1, M2:userInfo.M2, M3:userInfo.M3, M4:userInfo.M4, M5:userInfo.M5, M6:userInfo.M6, M7:userInfo.M7, M8:userInfo.M8, M9:userInfo.M9, M10:userInfo.M10, M11:userInfo.M11, M12:userInfo.M12, M13:userInfo.M13, M14:userInfo.M14, M15:userInfo.M15, M16:userInfo.M16}) 
+        .eq("telegram_id", UserID);
+
+        res.status(200).send({ message: 'Количество майнеров обновлено!' });
+    }
+
     async getInvoiceLink(req, res) {
         const invoiceID = req.body.invoiceID;
         let result = await generate_invoice(invoiceID);
@@ -157,6 +170,7 @@ const router = express.Router();
 router.post('/UserAuthorization', (req, res) => tgController.UserAuthorization(req, res));
 router.post('/updateMiningPower', (req, res) => tgController.updateMiningPower(req, res));
 router.post('/GetTotalMiningPower', (req, res) => tgController.GetTotalMiningPower(req, res));
+router.post('/updateCountMiners', (req, res) => tgController.updateCountMiners(req, res));
 router.post('/getInvoiceLink', (req, res) => tgController.getInvoiceLink(req, res));
 router.post('/resetting_daily_tasks', (req, res) => tgController.resetting_daily_tasks(req, res)); 
 router.post('/reward_for_new_block', (req, res) => tgController.reward_for_new_block(req, res)); 
