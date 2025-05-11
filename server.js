@@ -102,6 +102,15 @@ class TgController {
         res.status(200).send({ message: 'MiningPower обновлён!' });
     }
 
+
+    async GetTotalMiningPower(req, res) {
+        const { data: users_MiningPower } = await database
+        .from("users") 
+        .select("MiningPower")
+        .eq("role", "user");
+
+        res.json({ users_MiningPower: users_MiningPower });
+    }
     
     async getInvoiceLink(req, res) {
         const invoiceID = req.body.invoiceID;
@@ -147,6 +156,7 @@ const router = express.Router();
 
 router.post('/UserAuthorization', (req, res) => tgController.UserAuthorization(req, res));
 router.post('/updateMiningPower', (req, res) => tgController.updateMiningPower(req, res));
+router.post('/GetTotalMiningPower', (req, res) => tgController.GetTotalMiningPower(req, res));
 router.post('/getInvoiceLink', (req, res) => tgController.getInvoiceLink(req, res));
 router.post('/resetting_daily_tasks', (req, res) => tgController.resetting_daily_tasks(req, res)); 
 router.post('/reward_for_new_block', (req, res) => tgController.reward_for_new_block(req, res)); 
