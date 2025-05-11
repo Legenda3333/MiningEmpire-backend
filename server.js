@@ -139,6 +139,20 @@ class TgController {
     }
 
 
+    async rewardForCompletedTask(req, res) {
+        const UserID = req.body.UserID;
+        const taskID = req.body.taskID;
+        const TASK = `task${taskID}`;
+
+        await database
+            .from("users")
+            .update({[TASK]: true }) 
+            .eq("telegram_id", UserID);
+
+        res.status(200).send({ message: `User ${UserID} выполнил задачу! ID задачи, ${taskID}` });
+    }
+
+
     async getInvoiceLink(req, res) {
         const invoiceID = req.body.invoiceID;
         let result = await generate_invoice(invoiceID);
@@ -186,6 +200,7 @@ router.post('/updateMiningPower', (req, res) => tgController.updateMiningPower(r
 router.post('/GetTotalMiningPower', (req, res) => tgController.GetTotalMiningPower(req, res));
 router.post('/updateCountMiners', (req, res) => tgController.updateCountMiners(req, res));
 router.post('/updateStatusWallet', (req, res) => tgController.updateStatusWallet(req, res));
+router.post('/rewardForCompletedTask', (req, res) => tgController.rewardForCompletedTask(req, res));
 router.post('/getInvoiceLink', (req, res) => tgController.getInvoiceLink(req, res));
 router.post('/resetting_daily_tasks', (req, res) => tgController.resetting_daily_tasks(req, res)); 
 router.post('/reward_for_new_block', (req, res) => tgController.reward_for_new_block(req, res)); 
