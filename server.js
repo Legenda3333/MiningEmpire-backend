@@ -132,7 +132,7 @@ class TgController {
 
         await database
         .from("users")
-        .update({ wallet_connect: true }) 
+        .update({ wallet_connect: statusWallet }) 
         .eq("telegram_id", UserID);
 
         res.status(200).send({ message: 'Статус кошелька изменён на', statusWallet });
@@ -185,7 +185,7 @@ router.post('/UserAuthorization', (req, res) => tgController.UserAuthorization(r
 router.post('/updateMiningPower', (req, res) => tgController.updateMiningPower(req, res));
 router.post('/GetTotalMiningPower', (req, res) => tgController.GetTotalMiningPower(req, res));
 router.post('/updateCountMiners', (req, res) => tgController.updateCountMiners(req, res));
-router.post('/updateStatusWallet', (req, res) => tgController.updateCountMiners(req, res));
+router.post('/updateStatusWallet', (req, res) => tgController.updateStatusWallet(req, res));
 router.post('/getInvoiceLink', (req, res) => tgController.getInvoiceLink(req, res));
 router.post('/resetting_daily_tasks', (req, res) => tgController.resetting_daily_tasks(req, res)); 
 router.post('/reward_for_new_block', (req, res) => tgController.reward_for_new_block(req, res)); 
