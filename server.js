@@ -144,10 +144,20 @@ class TgController {
         const taskID = req.body.taskID;
         const TASK = `task${taskID}`;
 
-        await database
+        if (taskID[0] !== "1") {
+            await database
             .from("users")
             .update({[TASK]: true }) 
             .eq("telegram_id", UserID);
+        } else if (taskID[0] === "1") {
+            const CountCompletedTasks = req.body.CountCompletedTasks;
+            const COUNT_TASK = `count_task${taskID}`;
+
+            await database
+            .from("users")
+            .update({[TASK]: true, [COUNT_TASK]: CountCompletedTasks + 1 }) 
+            .eq("telegram_id", UserID);
+        }
 
         res.status(200).send({ message: `User ${UserID} выполнил задачу! ID задачи, ${taskID}` });
     }
