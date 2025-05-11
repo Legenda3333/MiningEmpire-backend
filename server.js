@@ -109,7 +109,7 @@ class TgController {
         .select("MiningPower")
         .eq("role", "user");
 
-        res.json({ users_MiningPower: users_MiningPower });
+        res.json({ users_MiningPower });
     }
     
     async getInvoiceLink(req, res) {
