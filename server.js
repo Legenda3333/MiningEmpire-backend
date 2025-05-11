@@ -22,7 +22,7 @@ async function generate_invoice(invoiceID) {
     let providerToken = ""; 
     let currency = "XTR";
 
-    if (invoiceID === "telegram_stars_daily_payment") {titleText = "Telegram Stars Daily Quest"; prices = [{ label: "Price Label", amount: 1 }]}
+    if (invoiceID === "telegram_stars_daily_payment") {titleText = "Telegram Stars Daily Quest"; prices = [{ label: "Price Label", amount: 25 }]}
 
     if (invoiceID === "miner1") {titleText = "Start Miner"; prices = [{ label: "Price Label", amount: 250 }]}
     if (invoiceID === "miner2") {titleText = "Red Miner"; prices = [{ label: "Price Label", amount: 375 }]}
