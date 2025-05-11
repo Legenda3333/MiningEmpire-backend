@@ -98,6 +98,8 @@ class TgController {
         .from("users")
         .update({ MiningPower: MiningPower }) 
         .eq("telegram_id", UserID); 
+
+        res.status(200).send({ message: 'MiningPower обновлён!' });
     }
 
     
