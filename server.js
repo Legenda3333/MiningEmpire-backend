@@ -90,6 +90,17 @@ class TgController {
     }
     
 
+    async updateMiningPower(req, res) {
+        const UserID = req.body.UserID;
+        const MiningPower = req.body.MiningPower;
+
+        await database
+        .from("users")
+        .update({ MiningPower: MiningPower }) 
+        .eq("telegram_id", UserID); 
+    }
+
+    
     async getInvoiceLink(req, res) {
         const invoiceID = req.body.invoiceID;
         let result = await generate_invoice(invoiceID);
@@ -110,7 +121,7 @@ class TgController {
     async reward_for_new_block(req, res) {
         const { data: users } = await database
             .from('users') 
-            .select('id, MiningPower, MEC')
+            .select('id, MiningPower, Coins')
             .eq('role', 'user');
     
         const totalMiningPower = users.reduce((sum, row) => sum + row.MiningPower, 0);
@@ -119,7 +130,7 @@ class TgController {
             const reward = user.MiningPower / totalMiningPower * 10000; // Вычисляем награду
             return database
                 .from('users') 
-                .update({ MEC: user.MEC + reward }) // Обновляем MEC
+                .update({ Coins: user.Coins + reward }) // Обновляем Coins
                 .eq('id', user.id); // Условие обновления по id
         });
     
@@ -133,6 +144,7 @@ const tgController = new TgController();
 const router = express.Router();
 
 router.post('/UserAuthorization', (req, res) => tgController.UserAuthorization(req, res));
+router.post('/updateMiningPower', (req, res) => tgController.updateMiningPower(req, res));
 router.post('/getInvoiceLink', (req, res) => tgController.getInvoiceLink(req, res));
 router.post('/resetting_daily_tasks', (req, res) => tgController.resetting_daily_tasks(req, res)); 
 router.post('/reward_for_new_block', (req, res) => tgController.reward_for_new_block(req, res)); 
