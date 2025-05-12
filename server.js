@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { Telegraf, Markup } from 'telegraf';
+import { Telegraf } from 'telegraf';
 import { createClient } from '@supabase/supabase-js';
 //import fetch from 'node-fetch';
 import dotenv from 'dotenv';
@@ -139,6 +139,21 @@ class TgController {
     }
 
 
+    async checkingChannelSubscription(req, res) {
+        const UserID = req.body.UserID;
+        const channelUsername = req.body.channelUsername;
+        const chatMember = await bot.telegram.getChatMember(channelUsername, UserID);
+    
+        if (chatMember.status === 'member' || chatMember.status === 'administrator' || chatMember.status === 'creator') {
+            console.log('Пользователь подписан на канал');
+        } else {
+            console.log('Пользователь НЕ подписан на канал');
+        }
+
+        res.status(200).send({ message: 'Проверка выполнена!' });
+    }
+
+
     async rewardForCompletedTask(req, res) {
         const UserID = req.body.UserID;
         const taskID = req.body.taskID;
@@ -210,7 +225,7 @@ router.post('/updateMiningPower', (req, res) => tgController.updateMiningPower(r
 router.post('/GetTotalMiningPower', (req, res) => tgController.GetTotalMiningPower(req, res));
 router.post('/updateCountMiners', (req, res) => tgController.updateCountMiners(req, res));
 router.post('/updateStatusWallet', (req, res) => tgController.updateStatusWallet(req, res));
-router.post('/rewardForCompletedTask', (req, res) => tgController.rewardForCompletedTask(req, res));
+router.post('/checkingChannelSubscription', (req, res) => tgController.checkingChannelSubscription(req, res));
 router.post('/getInvoiceLink', (req, res) => tgController.getInvoiceLink(req, res));
 router.post('/resetting_daily_tasks', (req, res) => tgController.resetting_daily_tasks(req, res)); 
 router.post('/reward_for_new_block', (req, res) => tgController.reward_for_new_block(req, res)); 
