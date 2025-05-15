@@ -144,13 +144,12 @@ class TgController {
         const channelUsername = req.body.channelUsername;
         const chatMember = await bot.telegram.getChatMember(channelUsername, UserID);
     
-        if (chatMember.status === 'member' || chatMember.status === 'administrator' || chatMember.status === 'creator') {
-            console.log('Пользователь подписан на канал');
-        } else {
-            console.log('Пользователь НЕ подписан на канал');
-        }
-
-        res.status(200).send({ message: 'Проверка выполнена!' });
+        const isSubscribed = chatMember.status === 'member' || chatMember.status === 'administrator' || chatMember.status === 'creator';
+    
+        res.status(200).send({ 
+            message: 'Проверка выполнена!', 
+            isSubscribed: isSubscribed 
+        });
     }
 
 
