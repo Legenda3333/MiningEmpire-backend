@@ -161,7 +161,7 @@ class TgController {
         if (taskID[0] !== "1") {
             await database
             .from("users")
-            .update({[TASK]: true }) 
+            .update({[TASK]: 'true' }) 
             .eq("telegram_id", UserID);
         } else if (taskID[0] === "1") {
             const CountCompletedTasks = req.body.CountCompletedTasks;
@@ -169,7 +169,7 @@ class TgController {
 
             await database
             .from("users")
-            .update({[TASK]: true, [COUNT_TASK]: CountCompletedTasks + 1 }) 
+            .update({[TASK]: 'true', [COUNT_TASK]: CountCompletedTasks + 1 }) 
             .eq("telegram_id", UserID);
         }
 
