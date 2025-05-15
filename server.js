@@ -225,6 +225,7 @@ router.post('/GetTotalMiningPower', (req, res) => tgController.GetTotalMiningPow
 router.post('/updateCountMiners', (req, res) => tgController.updateCountMiners(req, res));
 router.post('/updateStatusWallet', (req, res) => tgController.updateStatusWallet(req, res));
 router.post('/checkingChannelSubscription', (req, res) => tgController.checkingChannelSubscription(req, res));
+router.post('/rewardForCompletedTask', (req, res) => tgController.rewardForCompletedTask(req, res));
 router.post('/getInvoiceLink', (req, res) => tgController.getInvoiceLink(req, res));
 router.post('/resetting_daily_tasks', (req, res) => tgController.resetting_daily_tasks(req, res)); 
 router.post('/reward_for_new_block', (req, res) => tgController.reward_for_new_block(req, res)); 
