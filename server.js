@@ -66,7 +66,7 @@ class TgController {
                 languageCode: req.body.languageCode, 
                 isPremium: req.body.isPremium, 
                 time_reg: req.body.registrationTime,
-                profilePicture_url: req.body.profilePicture
+                profilePicture: req.body.profilePicture
             };
     
             await database
@@ -83,7 +83,7 @@ class TgController {
     
         const { data: friendsList } = await database
             .from('users')
-            .select('firstName, lastName, username, MiningPower, profilePicture_url, isPremium, time_reg')
+            .select('firstName, lastName, username, MiningPower, profilePicture, isPremium, time_reg')
             .eq('referral_ID', userID);
         
         res.json({ user: userData[0], friends: friendsList });
