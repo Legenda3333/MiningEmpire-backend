@@ -61,7 +61,7 @@ class TgController {
             const NewUserInfo = { 
                 telegramID: userID, 
                 firstName: req.body.firstName, 
-                last_name: req.body.lastName, 
+                lastName: req.body.lastName, 
                 username: req.body.username, 
                 language: req.body.languageCode, 
                 is_premium: req.body.isPremium, 
@@ -83,7 +83,7 @@ class TgController {
     
         const { data: friendsList } = await database
             .from('users')
-            .select('firstName, last_name, username, MiningPower, avatar_url, is_premium, time_reg')
+            .select('firstName, lastName, username, MiningPower, avatar_url, is_premium, time_reg')
             .eq('referral_ID', userID);
         
         res.json({ user: userData[0], friends: friendsList });
