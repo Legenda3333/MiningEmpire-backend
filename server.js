@@ -55,18 +55,18 @@ class TgController {
         const { data: initialUserData } = await database
             .from('users')
             .select('*')
-            .eq('telegram_id', userID);
+            .eq('telegramID', userID);
     
         if (initialUserData.length === 0) {
             const NewUserInfo = { 
-                telegram_id: userID, 
-                first_name: req.body.first_name, 
-                last_name: req.body.last_name, 
+                telegramID: userID, 
+                first_name: req.body.firstName, 
+                last_name: req.body.lastName, 
                 username: req.body.username, 
-                language: req.body.language_code, 
-                is_premium: req.body.is_premium, 
-                time_reg: req.body.time_reg,
-                avatar_url: req.body.avatar
+                language: req.body.languageCode, 
+                is_premium: req.body.isPremium, 
+                time_reg: req.body.registrationTime,
+                avatar_url: req.body.profilePicture
             };
     
             await database
@@ -76,7 +76,7 @@ class TgController {
             const { data: createdUserData } = await database
                 .from('users')
                 .select('*')
-                .eq('telegram_id', userID);
+                .eq('telegramID', userID);
             
             userData = createdUserData;
         } else { userData = initialUserData; }
@@ -97,7 +97,7 @@ class TgController {
         await database
         .from("users")
         .update({ MiningPower: MiningPower }) 
-        .eq("telegram_id", UserID); 
+        .eq("telegramID", UserID); 
 
         res.status(200).send({ message: 'MiningPower обновлён!' });
     }
@@ -120,7 +120,7 @@ class TgController {
         await database
         .from("users")
         .update({M1:userInfo.M1, M2:userInfo.M2, M3:userInfo.M3, M4:userInfo.M4, M5:userInfo.M5, M6:userInfo.M6, M7:userInfo.M7, M8:userInfo.M8, M9:userInfo.M9, M10:userInfo.M10, M11:userInfo.M11, M12:userInfo.M12, M13:userInfo.M13, M14:userInfo.M14, M15:userInfo.M15, M16:userInfo.M16}) 
-        .eq("telegram_id", UserID);
+        .eq("telegramID", UserID);
 
         res.status(200).send({ message: 'Количество майнеров обновлено!' });
     }
@@ -133,7 +133,7 @@ class TgController {
         await database
         .from("users")
         .update({ wallet_connect: statusWallet }) 
-        .eq("telegram_id", UserID);
+        .eq("telegramID", UserID);
 
         res.status(200).send({ message: 'Статус кошелька изменён на', statusWallet });
     }
@@ -162,7 +162,7 @@ class TgController {
             await database
             .from("users")
             .update({[TASK]: 'true' }) 
-            .eq("telegram_id", UserID);
+            .eq("telegramID", UserID);
         } else if (taskID[0] === "1") {
             const CountCompletedTasks = req.body.CountCompletedTasks;
             const COUNT_TASK = `count_task${taskID}`;
@@ -170,7 +170,7 @@ class TgController {
             await database
             .from("users")
             .update({[TASK]: 'true', [COUNT_TASK]: CountCompletedTasks + 1 }) 
-            .eq("telegram_id", UserID);
+            .eq("telegramID", UserID);
         }
 
         res.status(200).send({ message: `User ${UserID} выполнил задачу! ID задачи, ${taskID}` });
