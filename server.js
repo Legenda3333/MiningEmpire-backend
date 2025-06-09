@@ -48,18 +48,18 @@ async function generate_invoice(invoiceID) {
 }
 
 class TgController {
-    async UserAuthorization(req, res) {
-        const UserID = req.body.UserID;
-        let userData;
+    async userAuthorization(req, res) {
+        const userID = req.body.userID;
+        let userData = null;
 
         const { data: initialUserData } = await database
             .from('users')
             .select('*')
-            .eq('telegram_id', UserID);
+            .eq('telegram_id', userID);
     
         if (initialUserData.length === 0) {
             const NewUserInfo = { 
-                telegram_id: UserID, 
+                telegram_id: userID, 
                 first_name: req.body.first_name, 
                 last_name: req.body.last_name, 
                 username: req.body.username, 
@@ -76,15 +76,15 @@ class TgController {
             const { data: createdUserData } = await database
                 .from('users')
                 .select('*')
-                .eq('telegram_id', UserID);
+                .eq('telegram_id', userID);
             
             userData = createdUserData;
-        } else { userData = initialUserData }
+        } else { userData = initialUserData; }
     
         const { data: friendsList } = await database
             .from('users')
             .select('first_name, last_name, username, MiningPower, avatar_url, is_premium, time_reg')
-            .eq('referal_id', UserID);
+            .eq('referal_id', userID);
         
         res.json({ user: userData[0], friends: friendsList });
     }
@@ -219,7 +219,7 @@ const tgController = new TgController();
 
 const router = express.Router();
 
-router.post('/UserAuthorization', (req, res) => tgController.UserAuthorization(req, res));
+router.post('/userAuthorization', (req, res) => tgController.userAuthorization(req, res));
 router.post('/updateMiningPower', (req, res) => tgController.updateMiningPower(req, res));
 router.post('/GetTotalMiningPower', (req, res) => tgController.GetTotalMiningPower(req, res));
 router.post('/updateCountMiners', (req, res) => tgController.updateCountMiners(req, res));
