@@ -2,7 +2,6 @@ import express from 'express';
 import cors from 'cors';
 import { Telegraf } from 'telegraf';
 import { createClient } from '@supabase/supabase-js';
-//import fetch from 'node-fetch';
 import dotenv from 'dotenv';
 dotenv.config();
 
