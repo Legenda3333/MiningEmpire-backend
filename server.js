@@ -49,14 +49,13 @@ async function generate_invoice(invoiceID) {
 class TgController {
     async userAuthorization(req, res) {
         const telegramUserData = req.body.telegramUserData;
-        console.log(telegramUserData.id);
-        //const userID = req.body.userID;
+        const userID = telegramUserData.id;
         let userData = null;
 
         const { data: initialUserData } = await database
             .from('users')
             .select('*')
-            .eq('telegramID', telegramUserData.id);
+            .eq('telegramID', userID);
     
         if (initialUserData.length === 0) {
             const NewUserInfo = { 
@@ -77,7 +76,7 @@ class TgController {
             const { data: createdUserData } = await database
                 .from('users')
                 .select('*')
-                .eq('telegramID', telegramUserData.id);
+                .eq('telegramID', userID);
             
             userData = createdUserData;
         } else { userData = initialUserData; }
@@ -85,7 +84,7 @@ class TgController {
         const { data: friendsList } = await database
             .from('users')
             .select('firstName, lastName, username, MiningPower, profilePicture, isPremium, registrationTime')
-            .eq('referral_ID', telegramUserData.id);
+            .eq('referral_ID', userID);
         
         res.json({ user: userData[0], friends: friendsList });
     }
