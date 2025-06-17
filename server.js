@@ -60,13 +60,13 @@ class TgController {
         if (initialUserData.length === 0) {
             const NewUserInfo = { 
                 telegramID: userID, 
-                firstName: req.body.firstName, 
-                lastName: req.body.lastName, 
-                username: req.body.username, 
-                languageCode: req.body.languageCode, 
-                isPremium: req.body.isPremium, 
-                registrationTime: req.body.registrationTime,
-                profilePicture: req.body.profilePicture
+                firstName: telegramUserData.first_name, 
+                lastName: telegramUserData.last_name || "", 
+                username: telegramUserData.username || "NO USERNAME", 
+                languageCode: telegramUserData.language_code || "", 
+                isPremium: telegramUserData.is_premium || false, 
+                registrationTime: Math.floor(Date.now() / 1000),
+                profilePicture: telegramUserData.photo_url || "images/undefined_profilePicture.png"
             };
     
             await database
