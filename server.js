@@ -48,7 +48,9 @@ async function generate_invoice(invoiceID) {
 
 class TgController {
     async userAuthorization(req, res) {
-        const userID = req.body.userID;
+        const telegramUserData = req.body.telegramUserData;
+        console.log(telegramUserData.id);
+        //const userID = req.body.userID;
         let userData = null;
 
         const { data: initialUserData } = await database
