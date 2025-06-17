@@ -56,7 +56,7 @@ class TgController {
         const { data: initialUserData } = await database
             .from('users')
             .select('*')
-            .eq('telegramID', userID);
+            .eq('telegramID', telegramUserData.id);
     
         if (initialUserData.length === 0) {
             const NewUserInfo = { 
@@ -77,7 +77,7 @@ class TgController {
             const { data: createdUserData } = await database
                 .from('users')
                 .select('*')
-                .eq('telegramID', userID);
+                .eq('telegramID', telegramUserData.id);
             
             userData = createdUserData;
         } else { userData = initialUserData; }
@@ -85,7 +85,7 @@ class TgController {
         const { data: friendsList } = await database
             .from('users')
             .select('firstName, lastName, username, MiningPower, profilePicture, isPremium, registrationTime')
-            .eq('referral_ID', userID);
+            .eq('referral_ID', telegramUserData.id);
         
         res.json({ user: userData[0], friends: friendsList });
     }
